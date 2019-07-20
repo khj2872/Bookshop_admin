@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>Bootstrap Admin Template </title>
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-icon-style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" th:href="@{/css/pages/login.css}">
+</head>
+
+<body>
+
+
+
+
+
+
+<!--====================================================
+                        PAGE CONTENT
+======================================================-->
+<section class="hero-area">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="contact-h-cont">
+                    <h3 class="text-center"><img th:src="@{/img/logo.png}" class="img-fluid" alt=""></h3><br>
+                    <p th:if="${loginError}" style="color: red;">아이디 또는 비밀번호를 다시 확인하세요.</p>
+                    <p th:if="${loginAuthError}" style="color: red;">관리자 계정이 아닙니다.</p>
+                    <form method="post" th:action="@{/members/login}">
+                        <div class="form-group">
+                            <label for="userEmail">Email</label>
+                            <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" type="password" id="password" name="password">
+                        </div>
+                        <button class="btn btn-general btn-blue" type="submit"><i fa fa-right-arrow></i>Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Global Javascript -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/tether.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

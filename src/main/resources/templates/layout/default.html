@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="all,follow">
+        <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+        <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+        <title>Bootstrap Admin Template </title>
+        <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+
+        <!-- 공통으로 쓰이는 css파일을넣는다.-->
+        <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Condensed}" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/font-awesome-4.7.0/css/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{/css/font-icon-style.css}">
+        <link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet">
+
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/popper/popper.min.js}"></script>
+        <script th:src="@{/js/tether.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.cookie.js}"></script>
+        <script th:src="@{/js/jquery.validate.min.js}"></script>
+        <script th:src="@{/js/chart.min.js}"></script>
+        <script th:src="@{/js/front.js}"></script>
+    </head>
+    <body>
+        <header th:replace="fragments/header :: headerFragment"></header>
+        <div class="page-content d-flex align-items-stretch">
+            <nav th:replace="fragments/sidebar :: sidebarFragment"></nav>
+            <div layout:fragment="content"></div>
+        </div>
+        <!-- 공통으로 쓰이는 js파일을넣는다.-->
+
+
+        <th:block layout:fragment="script"></th:block>
+
+    </body>
+</html>

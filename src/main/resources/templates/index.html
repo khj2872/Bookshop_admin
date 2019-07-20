@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <!-- index.html 고유 CSS 추가 -->
+    <link rel="stylesheet" th:href="@{/css/ui-elements/card.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+    <div layout:fragment="content" class="content-inner" style="height:100vh">
+            <!--***** REPORT-1 *****-->
+        <div class="row" id="report1">
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="text-left report1-cont">
+                            <h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i> $9,220</h2>
+                            <span class="text-muted">Todays Income</span>
+                        </div>
+                        <span class="text-success">80%</span>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p><small>Last month 10% Growth</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="text-left report1-cont">
+                            <h2 class="font-light m-b-0"><i class="ti-arrow-up text-danger"></i> $5,530</h2>
+                            <span class="text-muted">Gross Profit</span>
+                        </div>
+                        <span class="text-danger">43%</span>
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 43%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p><small>Last month 10% Growth</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="text-left report1-cont">
+                            <h2 class="font-light m-b-0"><i class="ti-arrow-up text-warning"></i> $3,620</h2>
+                            <span class="text-muted">Interest Expenses </span>
+                        </div>
+                        <span class="text-warning">53%</span>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 53%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p><small>Last month 10% Growth</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="text-left report1-cont">
+                            <h2 class="font-light m-b-0"><i class="ti-arrow-up text-info"></i> $82,600</h2>
+                            <span class="text-muted">Net Profit</span>
+                        </div>
+                        <span class="text-info">70%</span>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p><small>Last month 10% Growth</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- index.html 고유 스크립트 추가 -->
+    <script>
+        !function ($) {
+
+            // Le left-menu sign
+            /* for older jquery version
+            $('#left ul.nav li.parent > a > span.sign').click(function () {
+                $(this).find('i:first').toggleClass("icon-minus");
+            }); */
+
+            $(document).on("click","#left ul.nav li.parent > a > span.sign", function(){
+                $(this).find('i:first').toggleClass("icon-minus");
+            });
+
+            // Open Le current menu
+            $("#left ul.nav li.parent.active > a > span.sign").find('i:first').addClass("icon-minus");
+            $("#left ul.nav li.current").parents('ul.children').addClass("in");
+
+        }(window.jQuery);
+    </script>
+</html>
+
