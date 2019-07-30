@@ -14,7 +14,7 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.maven'
 
-script: "mvnw clean package"
+script: "./mvnw clean package"
 
 # CI 실행 완료시 메일로 알람
 notifications:
