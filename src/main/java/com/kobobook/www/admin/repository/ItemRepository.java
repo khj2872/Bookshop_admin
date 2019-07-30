@@ -3,6 +3,7 @@ package com.kobobook.www.admin.repository;
 
 import com.kobobook.www.admin.domain.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {

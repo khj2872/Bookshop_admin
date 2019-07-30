@@ -36,7 +36,7 @@ public class ItemController {
     private CategoryRepository categoryRepository;
 
     @GetMapping("/register")
-    public String createForm(Model model) {
+    public String registerItemForm(Model model) {
         List<Category> categoryList = categoryRepository.findAll();
 
         model.addAttribute("categoryList", categoryList);
@@ -45,7 +45,7 @@ public class ItemController {
     }
 
     @PostMapping("/register")
-    public String create(Item item) {
+    public String registerItem(Item item) {
         System.out.println("item : " + item);
         itemService.create(item);
         return "redirect:/admin/items/register";
@@ -82,6 +82,13 @@ public class ItemController {
         model.addAttribute("item", item);
 
         return "item/register";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateItem(@PathVariable("id") Integer itemId, @RequestBody Item item) {
+        itemService.updateItem(itemId, item);
+
+        return "redirect:/admin/items/update/"+itemId;
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,14 +24,16 @@ public class AuthProvider implements AuthenticationProvider {
 
     private MemberService memberService;
 
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userEmail = authentication.getName();
-        String password = HashUtil.sha256(authentication.getCredentials().toString());
+        String password = authentication.getCredentials().toString();
 
         Member member = memberService.selectMember(userEmail);
 
-        if (member == null || !member.getPassword().equals(password)) {
+        if (member == null || !passwordEncoder.matches(password, member.getPassword())) {
             throw new IdPasswordNotMatchingException("아이디와 비밀번호가 일치하지 않습니다.");
         }
 

@@ -17,11 +17,6 @@ public class AdminApplicationTests {
 
     @Test
     public void contextLoads() {
-        Member member = new Member();
-        member.setUsername("아무개");
-        member.setPassword("testpw12");
-        member.setUserEmail("test1234@email.com");
-        memberService.create(member);
 
     }
 

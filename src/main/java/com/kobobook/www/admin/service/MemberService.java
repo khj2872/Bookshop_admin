@@ -6,6 +6,7 @@ import com.kobobook.www.admin.exception.AlreadyExistingMemberException;
 import com.kobobook.www.admin.repository.MemberRepository;
 import com.kobobook.www.admin.util.HashUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ import java.util.Date;
 public class MemberService {
 
     private MemberRepository memberRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     /*
     * OAuth 회원가입 및 로그인
@@ -51,7 +54,7 @@ public class MemberService {
         } else {
             member.setRole(Role.ROLE_USER);
             member.setRegDate(new Date());
-            member.setPassword(HashUtil.sha256(member.getPassword()));
+            member.setPassword(passwordEncoder.encode(member.getPassword()));
             memberRepository.save(member);
         }
     }

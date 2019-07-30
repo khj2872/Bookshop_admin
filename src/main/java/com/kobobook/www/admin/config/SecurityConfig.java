@@ -2,20 +2,20 @@ package com.kobobook.www.admin.config;
 
 import com.kobobook.www.admin.service.AuthProvider;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthProvider authProvider;
 
@@ -34,7 +34,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // 로그인 설정
         http.authorizeRequests()
                     // ROLE_USER, ROLE_ADMIN으로 권한 분리 URL 정의
-                    .antMatchers("/members/login", "/members/facebookCallback", "/error**").permitAll()
+                    .antMatchers("/members/login", "/error**").permitAll()
     //                .antMatchers("/*").hasAuthority("ROLE_USER")
                     .antMatchers("/**").access("hasAuthority('ROLE_ADMIN')")
                     .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")

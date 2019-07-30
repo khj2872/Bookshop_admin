@@ -24,15 +24,6 @@
 </head>
 
 <body>
-
-
-
-
-
-
-<!--====================================================
-                        PAGE CONTENT
-======================================================-->
 <section class="hero-area">
     <div class="overlay"></div>
     <div class="container">
@@ -45,11 +36,11 @@
                     <form method="post" th:action="@{/members/login}">
                         <div class="form-group">
                             <label for="userEmail">Email</label>
-                            <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Username">
+                            <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="이메일을 입력하세요">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input class="form-control" type="password" id="password" name="password">
+                            <input class="form-control" type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
                         </div>
                         <button class="btn btn-general btn-blue" type="submit"><i fa fa-right-arrow></i>Login</button>
                     </form>
@@ -62,6 +53,7 @@
 <!--Global Javascript -->
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/tether.min.js}"></script>
+<script th:src="@{/js/popper/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 

@@ -64,4 +64,34 @@ public class Item {
         this.stock = restStock;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setItem(Item item) {
+        this.setName(item.name);
+        this.setWriter(item.writer);
+        this.setISBN(item.ISBN);
+        this.setPublicationDate(item.publicationDate);
+        this.setUpdateDate(new Date());
+        this.setDetail(item.detail);
+        this.setPrice(item.price);
+        this.setStock(item.stock);
+        this.setAvgRating(item.avgRating);
+        this.setCategory(item.category);
+        this.setImage(item.image);
+    }
+
 }

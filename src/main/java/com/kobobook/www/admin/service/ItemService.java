@@ -39,4 +39,10 @@ public class ItemService {
         return modelMapper.map(itemRepository.findItemWithCategory(itemId), ItemDTO.ItemWithCategory.class);
 
     }
+
+    @Transactional
+    public void updateItem(Integer itemId, Item item) {
+        Item originalItem = itemRepository.findById(itemId).orElse(null);
+        originalItem.setItem(item);
+    }
 }
