@@ -52,7 +52,7 @@ public class MemberService {
         if(chkMember != null) {
             throw new AlreadyExistingMemberException("dup id " + member.getUserEmail());
         } else {
-            member.setRole(Role.ROLE_USER);
+            member.setRole(Role.ROLE_ADMIN);
             member.setRegDate(new Date());
             member.setPassword(passwordEncoder.encode(member.getPassword()));
             memberRepository.save(member);

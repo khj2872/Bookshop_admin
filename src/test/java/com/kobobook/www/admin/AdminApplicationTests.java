@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AdminApplicationTests {
@@ -17,6 +19,13 @@ public class AdminApplicationTests {
 
     @Test
     public void contextLoads() {
+        Member member = new Member();
+        member.setUsername("관리자");
+        member.setRegDate(new Date());
+        member.setUserEmail("test");
+        member.setPassword("test");
+
+        memberService.create(member);
 
     }
 

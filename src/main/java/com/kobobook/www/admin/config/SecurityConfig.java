@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 허용되어야 할 경로들
-        web.ignoring().antMatchers("/resources/**", "/js/**", "/css/**", "/img/**", "/fonts/**", "/font-awesome-4.7.0/**", "/icons-reference/**");
+        web.ignoring().antMatchers("/resources/**", "/js/**", "/css/**", "/img/**", "/fonts/**", "/font-awesome-4.7.0/**", "/icons-reference/**", "/h2-console");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 로그인 설정
         http.authorizeRequests()
                     // ROLE_USER, ROLE_ADMIN으로 권한 분리 URL 정의
-                    .antMatchers("/members/login", "/error**").permitAll()
+                    .antMatchers("/members/login", "/h2-console", "/error**").permitAll()
     //                .antMatchers("/*").hasAuthority("ROLE_USER")
                     .antMatchers("/**").access("hasAuthority('ROLE_ADMIN')")
                     .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
