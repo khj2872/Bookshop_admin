@@ -22,18 +22,6 @@ logging:
         type:
           descriptor:
             sql: trace
-cloud:
-  aws:
-    stack:
-      auto: false
-    s3:
-      bucket: kobobook
-    region:
-      static: ap-northeast-2
-    credentials:
-      access-key: AKIA47GW4QDEVIPCJQWY
-      secret-key: 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
-
 ---
 spring:
   h2:
