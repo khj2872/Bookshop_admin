@@ -22,6 +22,15 @@ logging:
         type:
           descriptor:
             sql: trace
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    s3:
+      bucket: kobobook
+    region:
+      static: ap-northeast-2
 ---
 spring:
   h2:
