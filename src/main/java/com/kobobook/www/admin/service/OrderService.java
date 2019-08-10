@@ -1,20 +1,20 @@
 package com.kobobook.www.admin.service;
 
-import com.kobobook.www.admin.domain.DeliveryStatus;
 import com.kobobook.www.admin.domain.Order;
 import com.kobobook.www.admin.domain.OrderItem;
+import com.kobobook.www.admin.domain.OrderSearch;
 import com.kobobook.www.admin.dto.OrderDTO;
-import com.kobobook.www.admin.repository.OrderItemRepository;
+import com.kobobook.www.admin.dto.OrderItemDTO;
 import com.kobobook.www.admin.repository.OrderRepository;
+import com.kobobook.www.admin.repository.custom.OrderRepositoryImpl;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.OrderBy;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,43 +22,94 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class OrderService {
 
-    private OrderItemRepository orderItemRepository;
-
     private OrderRepository orderRepository;
+
+    private OrderRepositoryImpl orderRepositoryImpl;
 
     private ModelMapper modelMapper;
 
     /*
-    * 배송 처리
-    * */
-    @Transactional
-    public void startOrder(Integer orderItemId) {
-        OrderItem orderItem = orderItemRepository.findById(orderItemId).orElse(null);
-        orderItem.getOrder().getDelivery().setStatus(DeliveryStatus.COMP);
-        orderItemRepository.save(orderItem);
-    }
-
-    /*
-    * 주문 취소
-    * */
-    @Transactional
-    public void cancelOrder(Integer orderId) throws RuntimeException{
-        Order order = orderRepository.findById(orderId).orElse(null);
-        order.cancel();
-    }
-
-    /*
     * 배송준비중 조회
     * */
-//    @Transactional
-//    public Page<OrderDTO> readBeginOrderList() {
-////        Page<Order> orderPage = orderRepository.findBiginOrders(PageRequest.of(0, 10, new Sort(Sort.Direction.DESC, "orderDate")));
-////        return orderPage.map(o -> convertToDto(o));
-//    }
+    @Transactional
+    public List<OrderItemDTO> readReadyOrderList(OrderSearch orderSearch) {
+        List<OrderItem> orderList = orderRepositoryImpl.searchReadyOrderList(orderSearch);
+        return orderList.stream()
+                .map(this::convertToOrderItemDto)
+                .collect(Collectors.toList());
+    }
 
-    private OrderDTO convertToDto(Order order) {
-        OrderDTO orderDto = modelMapper.map(order, OrderDTO.class);
-        return orderDto;
+    /*
+     * 전체 주문 조회
+     * */
+    @Transactional
+    public List<OrderItemDTO> readAllOrderList(OrderSearch orderSearch) {
+        List<OrderItem> orderItemList = orderRepositoryImpl.searchAllOrderList(orderSearch);
+        return orderItemList.stream()
+                .map(this::convertToOrderItemDto)
+                .collect(Collectors.toList());
+    }
+
+    /*
+     * 주문 상세내역 조회
+     * */
+    @Transactional
+    public List<OrderItemDTO> readOrderDetail(Integer orderId) {
+        return orderRepositoryImpl.searchOrderDetail(orderId).stream()
+                .map(this::convertToOrderItemDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public long findTodayTotalPrice() {
+        return getDayTotalPrice(LocalDate.now());
+    }
+
+    @Transactional
+    public long findYesterdayTotalPrice() {
+        return getDayTotalPrice(LocalDate.now().minusDays(1));
+    }
+
+    @Transactional
+    public long findCurMonthTotalPrice() {
+        return getMonthTotalPrice(LocalDate.now());
+    }
+
+    @Transactional
+    public long findPrevMonthTotalPrice() {
+        return getMonthTotalPrice(LocalDate.now().minusMonths(1));
+    }
+
+    private long getDayTotalPrice(LocalDate localDate) {
+        List<Order> todayOrderList = getOrders(localDate, localDate);
+        return getTotalPrice(todayOrderList);
+    }
+
+    private long getMonthTotalPrice(LocalDate localDate) {
+        LocalDate start = localDate.withDayOfMonth(1); //해당 달의 1일
+        List<Order> monthOrderList = getOrders(localDate, start);
+        return getTotalPrice(monthOrderList);
+    }
+
+    private List<Order> getOrders(LocalDate localDate, LocalDate start) {
+        LocalDateTime startDatetime = LocalDateTime.of(start, LocalTime.of(0, 0, 0)); //00:00:00
+        LocalDateTime endDatetime = LocalDateTime.of(localDate, LocalTime.of(23, 59, 59)); //23:59:59
+        return orderRepository.findOrderBetweenDateTime(startDatetime, endDatetime);
+    }
+
+    private long getTotalPrice(List<Order> todayOrderList) {
+        long dayTotalPrice = 0;
+        for (Order order : todayOrderList) {
+            dayTotalPrice += order.getTotalPrice();
+        }
+        return dayTotalPrice;
+    }
+
+    private OrderItemDTO convertToOrderItemDto(OrderItem orderItem) {
+        OrderItemDTO orderItemDTO = modelMapper.map(orderItem, OrderItemDTO.class);
+        orderItemDTO.setTotalPrice(orderItem.getTotalPrice());
+        orderItemDTO.getOrder().setTotalPrice(orderItem.getOrder().getTotalPrice());
+        return orderItemDTO;
     }
 
 }

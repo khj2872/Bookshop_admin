@@ -4,7 +4,6 @@ import com.kobobook.www.admin.domain.Member;
 import com.kobobook.www.admin.domain.Role;
 import com.kobobook.www.admin.exception.IdPasswordNotMatchingException;
 import com.kobobook.www.admin.exception.UnAuthException;
-import com.kobobook.www.admin.util.HashUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

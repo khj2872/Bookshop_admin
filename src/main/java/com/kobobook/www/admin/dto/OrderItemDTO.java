@@ -11,10 +11,14 @@ public class OrderItemDTO {
 
     private Integer id;
 
+    private OrderDTO order;
+
     private ItemDTO.ItemSimple item;
 
     private long price;
 
     private int count;
+
+    private long totalPrice;
 
 }

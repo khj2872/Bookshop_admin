@@ -11,8 +11,10 @@ import lombok.ToString;
 @AllArgsConstructor
 public class OrderSearch {
 
+    private Integer orderId;
+    private String userEmail;
     private String itemName;
-
     private OrderStatus orderStatus;
+    private DeliveryStatus deliveryStatus;
 
 }

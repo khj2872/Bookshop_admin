@@ -81,11 +81,11 @@ public class ItemController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("item", item);
 
-        return "item/register";
+        return "item/update";
     }
 
     @PostMapping("/update/{id}")
-    public String updateItem(@PathVariable("id") Integer itemId, @RequestBody Item item) {
+    public String updateItem(@PathVariable("id") Integer itemId, Item item) {
         itemService.updateItem(itemId, item);
 
         return "redirect:/admin/items/update/"+itemId;

@@ -1,6 +1,7 @@
 package com.kobobook.www.admin;
 
 import com.kobobook.www.admin.domain.Member;
+import com.kobobook.www.admin.exception.AlreadyExistingMemberException;
 import com.kobobook.www.admin.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -9,10 +10,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @SpringBootApplication
-public class AdminApplication implements ApplicationRunner {
+public class AdminApplication implements ApplicationRunner{
 
     public static final String APPLICATION_LOCATIONS = "spring.config.location="
             + "classpath:application.yml,"
@@ -28,13 +30,17 @@ public class AdminApplication implements ApplicationRunner {
     MemberService memberService;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         Member member = new Member();
         member.setUsername("관리자");
-        member.setRegDate(new Date());
+        member.setRegDate(LocalDateTime.now());
         member.setUserEmail("test");
         member.setPassword("test");
+        try {
+            memberService.create(member);
+        } catch (AlreadyExistingMemberException ame) {
+            System.out.println("중복 id");
+        }
 
-        memberService.create(member);
     }
 }

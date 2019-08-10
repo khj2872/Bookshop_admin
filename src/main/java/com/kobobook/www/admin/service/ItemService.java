@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class ItemService {
     public void create(Item item) {
         Optional<Category> category = categoryRepository.findById(item.getCategory().getId());
         item.setCategory(category.orElse(null));
-        item.setRegDate(new Date());
+        item.setRegDate(LocalDateTime.now());
         itemRepository.save(item);
     }
 
@@ -42,7 +43,9 @@ public class ItemService {
 
     @Transactional
     public void updateItem(Integer itemId, Item item) {
-        Item originalItem = itemRepository.findById(itemId).orElse(null);
+        Item originalItem = itemRepository.findItemWithCategory(itemId);
+        Category category = categoryRepository.findById(item.getCategory().getId()).orElse(null);
+        item.setCategory(category);
         originalItem.setItem(item);
     }
 }

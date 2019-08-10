@@ -15,6 +15,8 @@ public class OrderDTO {
 
     private Integer id;
 
+    private MemberDTO member;
+
     private Date orderDate;
 
     private OrderStatus status;

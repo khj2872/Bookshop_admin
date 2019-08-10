@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,8 +40,7 @@ public class Member {
     @Embedded
     private Address address;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date regDate;
+    private LocalDateTime regDate;
 
     private long point;
 

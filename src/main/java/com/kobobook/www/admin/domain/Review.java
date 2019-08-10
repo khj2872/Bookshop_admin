@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -24,8 +25,7 @@ public class Review {
 
     private double rating;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date regDate;
+    private LocalDateTime regDate;
 
     private String content;
 
@@ -38,7 +38,7 @@ public class Review {
 
         review.setRating(rating);
         review.setContent(content);
-        review.setRegDate(new Date());
+        review.setRegDate(LocalDateTime.now());
 
         return review;
     }

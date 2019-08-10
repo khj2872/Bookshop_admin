@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,11 +28,9 @@ public class Item {
 
     private String publicationDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date regDate;
+    private LocalDateTime regDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateDate;
+    private LocalDateTime updateDate;
 
     @Lob
     private String detail;
@@ -85,7 +85,7 @@ public class Item {
         this.setWriter(item.writer);
         this.setISBN(item.ISBN);
         this.setPublicationDate(item.publicationDate);
-        this.setUpdateDate(new Date());
+        this.setUpdateDate(LocalDateTime.now());
         this.setDetail(item.detail);
         this.setPrice(item.price);
         this.setStock(item.stock);

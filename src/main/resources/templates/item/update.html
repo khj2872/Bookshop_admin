@@ -29,7 +29,7 @@
                 <br>
 
                 <div class="table-responsive">
-                    <form name="item" th:id="item" th:action="@{/admin/items/register}" method="post">
+                    <form name="item" th:id="item" th:action="@{/admin/items/update/{path}(path=${item.id})}" method="POST">
                         <table class="table table-bordered">
                             <tr>
                                 <td>상품 분류</td>
@@ -42,11 +42,12 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>
+                                            <td th:if="${item != null}">
                                                 <select style="width:100%" name="category.id">
                                                     <option th:each="category : ${categoryList}"
                                                             th:value="${category.id}"
-                                                            th:text="${category.name}"></option>
+                                                            th:text="${category.name}"
+                                                            th:selected="${item.category.id == category.id}"></option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -57,49 +58,49 @@
                             <tr>
                                 <td>도서명</td>
                                 <td>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" name="name" th:if="${item != null}" class="form-control" th:value="${item.name}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>저자</td>
                                 <td>
-                                    <input type="text" name="writer" class="form-control">
+                                    <input type="text" name="writer" th:if="${item != null}" class="form-control" th:value="${item.writer}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>ISBN</td>
                                 <td>
-                                    <input type="text" name="ISBN" class="form-control">
+                                    <input type="text" name="ISBN" th:if="${item != null}" class="form-control" th:value="${item.ISBN}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>출간일</td>
                                 <td>
-                                    <input type="text" name="publicationDate" class="form-control">
+                                    <input type="text" name="publicationDate" th:if="${item != null}" class="form-control" th:value="${item.publicationDate}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>책 소개</td>
                                 <td>
-                                    <input type="text" name="detail" class="form-control">
+                                    <input type="text" name="detail" th:if="${item != null}" class="form-control" th:value="${item.detail}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>가격</td>
-                                <td>
-                                    <input type="text" name="price" class="form-control">원
+                                <td th:if="${item != null}">
+                                    <input type="text" name="price" class="form-control" th:value="${item.price}">원
                                 </td>
                             </tr>
                             <tr>
                                 <td>재고</td>
-                                <td>
-                                    <input type="text" name="stock" class="form-control">부
+                                <td th:if="${item != null}">
+                                    <input type="text" name="stock" class="form-control" th:value="${item.stock}">부
                                 </td>
                             </tr>
                             <tr>
                                 <td>적립률</td>
-                                <td>
-                                    <input type="text" name="savingRate" class="form-control">%
+                                <td th:if="${item != null}">
+                                    <input type="text" name="savingRate" class="form-control" th:value="${item.savingRate}">%
                                 </td>
                             </tr>
                             <tr>
@@ -122,8 +123,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                    <button type="submit" th:onclick="registerItem()" class="btn btn-primary btn-sm">등록</button>
+                                <td colspan="2" th:if="${item != null}">
+                                    <button type="submit" class="btn btn-primary btn-sm">수정</button>
                                 </td>
                             </tr>
                         </table>
