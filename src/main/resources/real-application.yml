@@ -1,12 +1,11 @@
 spring:
   profiles: real-db
   datasource:
-    url: jdbc:mariadb://kobobook.cwsf2nuxjjdn.ap-northeast-2.rds.amazonaws.com:3306/kobobook
-    username: root
-    password: gurwls12
+    url:
+    username:
+    password:
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
-    #    database-platform: H2
     hibernate:
       ddl-auto: create
     show-sql: true

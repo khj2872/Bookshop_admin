@@ -8,7 +8,7 @@ spring:
     cache: false
 
   profiles:
-    active: set1
+    active: local
 
   servlet:
     multipart:
@@ -36,24 +36,24 @@ cloud:
       static: ap-northeast-2
 ---
 spring:
-#  h2:
-#    console:
-#      enabled: true
+  h2:
+    console:
+      enabled: true
   profiles: local
   datasource:
-#    platform: h2
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
+    platform: h2
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
   #mariadb
-    url: jdbc:mariadb://localhost:3306/shop
-    username: user1
-    password: 1234
-    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://localhost:3306/shop
+#    username: user1
+#    password: 1234
+#    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
-#    database-platform: H2
+    database-platform: H2
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
