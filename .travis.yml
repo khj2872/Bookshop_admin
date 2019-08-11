@@ -10,12 +10,17 @@ branches:
     - master
 
 # Travis CI 서버의 Home
-#cache:
-#  directories:
-#    - '$HOME/.m2/repository'
-#    - '$HOME/.maven'
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.maven'
 
 script: "./mvnw clean package"
+
+before_deploy:
+  - zip -r kobobook-webservice *
+  - mkdir -p deploy
+  - mv kobobook-webservice.zip deploy/kobobook-webservice.zip
 
 deploy:
   - provider: s3
