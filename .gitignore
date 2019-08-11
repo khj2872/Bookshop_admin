@@ -1,13 +1,11 @@
 HELP.md
 target/
-
-src/main/resources/aws.yml
-src/main/resources/real-application.yml
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
 
-
+src/main/resources/aws.yml
+src/main/resources/real-application.yml
 
 ### STS ###
 .apt_generated
