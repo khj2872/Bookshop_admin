@@ -24,15 +24,29 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: kobobook-deploy # 6-3-3에서 생성한 S3 버킷
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: kobobook-deploy
     region: ap-northeast-2
     skip_cleanup: true
     acl: public_read
     wait-until-deployed: true
     on:
-      repo: khj2872/Bookshop_admin #Github 주소
+      repo: khj2872/Bookshop_admin
+      branch: master
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: kobobook-deploy
+    key: kobobook-webservice.zip # S3 버킷에 저장된 springboot-webservice.zip 파일을 EC2로 배포
+    bundle_type: zip
+    application: kobobook-webservice # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: kobobook-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: khj2872/Bookshop_admin
       branch: master
 
 # CI 실행 완료시 메일로 알람
