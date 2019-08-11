@@ -4,7 +4,8 @@ target/
 !**/src/main/**
 !**/src/test/**
 
-src/main/resources/aws.yml
+aws.yml
+real-application.yml
 
 ### STS ###
 .apt_generated

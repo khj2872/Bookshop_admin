@@ -8,7 +8,7 @@ spring:
     cache: false
 
   profiles:
-    active:
+    active: set1
 
   servlet:
     multipart:
@@ -70,3 +70,17 @@ server:
     key-store-type: PKCS12
     key-alias: bns-ssl
   port: 8443
+
+---
+spring.profiles: set1
+spring.profiles.include: real-db
+
+server:
+  port: 8081
+
+---
+spring.profiles: set2
+spring.profiles.include: real-db
+
+server:
+  port: 8082
