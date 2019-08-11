@@ -8,7 +8,7 @@ spring:
     cache: false
 
   profiles:
-    active: local
+    active: set1
 
   servlet:
     multipart:
