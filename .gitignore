@@ -7,6 +7,8 @@ target/
 aws.yml
 real-application.yml
 
+src/main/resources/aws.yml
+src/main/resources/real-application.yml
 ### STS ###
 .apt_generated
 .classpath
