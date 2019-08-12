@@ -16,10 +16,10 @@ import java.util.Date;
 @SpringBootApplication
 public class AdminApplication implements ApplicationRunner{
 
-    public static final String APPLICATION_LOCATIONS = "spring.config.location="
+    private static final String APPLICATION_LOCATIONS = "spring.config.location="
             + "classpath:application.yml,"
-            + "classpath:aws.yml,"
-            + "classpath:real-application.yml";
+            + "E:/workspace/IDEA_workspace/config/kobobook-admin/real-application.yml"
+            + "/app/config/kobobook-admin/real-application.yml";
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(AdminApplication.class)
@@ -32,11 +32,12 @@ public class AdminApplication implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments args) {
-        Member member = new Member();
-        member.setUsername("관리자");
+        Member member = Member.builder()
+                .userEmail("test")
+                .password("test")
+                .username("관리자")
+                .build();
         member.setRegDate(LocalDateTime.now());
-        member.setUserEmail("test");
-        member.setPassword("test");
         try {
             memberService.create(member);
         } catch (AlreadyExistingMemberException ame) {

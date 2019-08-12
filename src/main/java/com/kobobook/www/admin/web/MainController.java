@@ -5,10 +5,13 @@ import com.kobobook.www.admin.repository.ItemRepository;
 import com.kobobook.www.admin.repository.OrderRepository;
 import com.kobobook.www.admin.service.OrderService;
 import lombok.AllArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +24,8 @@ public class MainController {
     private OrderRepository orderRepository;
 
     private ItemRepository itemRepository;
+
+    private Environment env;
 
     @GetMapping("/admin/dashboard")
     public String home(Model model) {
@@ -63,6 +68,14 @@ public class MainController {
     @GetMapping("/")
     public String main() {
         return "redirect:/admin/dashboard";
+    }
+
+    @GetMapping("/profile")
+    @ResponseBody
+    public String getProfile() {
+        return Arrays.stream(env.getActiveProfiles())
+                .findFirst()
+                .orElse("");
     }
 
 }

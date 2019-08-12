@@ -2,7 +2,9 @@ package com.kobobook.www.admin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -15,7 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@NoArgsConstructor
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +46,14 @@ public class Member {
 
     private long point;
 
+    @Builder
+    public Member(String userEmail, String username, String password, Role role) {
+        this.userEmail = userEmail;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
@@ -54,21 +64,5 @@ public class Member {
 
     public boolean isAdmin() {
         return this.role.equals(Role.ROLE_ADMIN);
-    }
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", userEmail='" + userEmail + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", oauthId='" + oauthId + '\'' +
-                ", role='" + role + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address=" + address +
-                ", regDate=" + regDate +
-                ", point=" + point +
-                '}';
     }
 }
