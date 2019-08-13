@@ -22,13 +22,17 @@ import java.util.Map;
 
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/admin/item")
 public class ItemRestController {
 
     private final S3Uploader s3Uploader;
 
     private ItemRepository itemRepository;
+
+    public ItemRestController(S3Uploader s3Uploader, ItemRepository itemRepository) {
+        this.s3Uploader = s3Uploader;
+        this.itemRepository = itemRepository;
+    }
 
     @PostMapping(value="/upload")
     public ResponseEntity<String> uploadItem(MultipartFile file) {
