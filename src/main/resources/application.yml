@@ -79,6 +79,10 @@ spring.profiles.include: real-db
 
 server:
   port: 8081
+  use-forward-headers: true
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
 
 ---
 spring.profiles: set2
@@ -86,3 +90,7 @@ spring.profiles.include: real-db
 
 server:
   port: 8082
+  use-forward-headers: true
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto

@@ -32,7 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 로그인 설정
-        http.authorizeRequests()
+        http.requiresChannel()
+                .anyRequest().requiresSecure()
+                .and()
+                .authorizeRequests()
                     // ROLE_USER, ROLE_ADMIN으로 권한 분리 URL 정의
                     .antMatchers("/members/login", "/profile", "/health", "/error**").permitAll()
     //                .antMatchers("/*").hasAuthority("ROLE_USER")
