@@ -1,8 +1,7 @@
 package com.kobobook.www.admin.domain;
 
 import com.kobobook.www.admin.exception.NotEnoughStockException;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +13,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

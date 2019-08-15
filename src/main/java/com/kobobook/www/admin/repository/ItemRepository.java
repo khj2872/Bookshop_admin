@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-    @Query("SELECT i FROM Item i JOIN i.category WHERE i.id = :itemId" )
+    @Query("SELECT i FROM Item i JOIN FETCH i.category WHERE i.id = :itemId" )
     Item findItemWithCategory(Integer itemId);
 
     @Query("SELECT COUNT(i) FROM Item i")

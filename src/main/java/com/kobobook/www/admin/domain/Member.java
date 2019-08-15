@@ -2,10 +2,7 @@ package com.kobobook.www.admin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,6 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,14 +44,6 @@ public class Member {
     private LocalDateTime regDate;
 
     private long point;
-
-    @Builder
-    public Member(String userEmail, String username, String password, Role role) {
-        this.userEmail = userEmail;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 
     @JsonIgnore
     @OneToMany(mappedBy = "member")

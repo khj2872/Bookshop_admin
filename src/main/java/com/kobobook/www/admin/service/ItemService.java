@@ -29,8 +29,8 @@ public class ItemService {
 
     @Transactional
     public void create(Item item) {
-        Optional<Category> category = categoryRepository.findById(item.getCategory().getId());
-        item.setCategory(category.orElse(null));
+        Category category = categoryRepository.findById(item.getCategory().getId()).orElse(null);
+        item.setCategory(category);
         item.setRegDate(LocalDateTime.now());
         itemRepository.save(item);
     }
@@ -38,7 +38,6 @@ public class ItemService {
     @Transactional
     public ItemDTO.ItemWithCategory findItemWithCategory(Integer itemId) {
         return modelMapper.map(itemRepository.findItemWithCategory(itemId), ItemDTO.ItemWithCategory.class);
-
     }
 
     @Transactional

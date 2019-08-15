@@ -14,7 +14,9 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @SpringBootApplication
-public class AdminApplication implements ApplicationRunner{
+public class AdminApplication
+//        implements ApplicationRunner
+                                {
 
     private static final String APPLICATION_LOCATIONS = "spring.config.location="
             + "classpath:application.yml,"
@@ -27,7 +29,7 @@ public class AdminApplication implements ApplicationRunner{
                 .run(args);
     }
 
-    @Autowired
+    /*@Autowired
     MemberService memberService;
 
     @Override
@@ -44,5 +46,5 @@ public class AdminApplication implements ApplicationRunner{
             System.out.println("중복 id");
         }
 
-    }
+    }*/
 }

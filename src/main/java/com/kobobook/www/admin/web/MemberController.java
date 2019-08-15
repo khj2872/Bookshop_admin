@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class MemberController {
 
-    @GetMapping("/login")
-    public String fbLogin(Model model) {
-        return "member/login";
-    }
-
     @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
