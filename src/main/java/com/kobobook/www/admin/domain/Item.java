@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString(exclude = "reviews")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -64,22 +65,6 @@ public class Item {
             throw new NotEnoughStockException("need more stock");
         }
         this.stock = restStock;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
-
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
     }
 
     public void setItem(Item item) {

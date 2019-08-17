@@ -5,12 +5,14 @@ import com.kobobook.www.admin.dto.OrderInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString(exclude = "order")
 @NoArgsConstructor
 public class Delivery {
 
@@ -33,12 +35,4 @@ public class Delivery {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Delivery{" +
-                "id=" + id +
-                ", address=" + address +
-                ", status=" + status +
-                '}';
-    }
 }

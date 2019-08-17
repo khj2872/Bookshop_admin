@@ -8,6 +8,7 @@ import com.kobobook.www.admin.repository.ItemRepository;
 import com.kobobook.www.admin.service.ItemService;
 import com.kobobook.www.admin.util.BoardPager;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,7 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/admin/items")
+@NoArgsConstructor
 @AllArgsConstructor
 public class ItemController {
 

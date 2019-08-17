@@ -5,11 +5,8 @@ import com.kobobook.www.admin.domain.Item;
 import com.kobobook.www.admin.dto.ItemDTO;
 import com.kobobook.www.admin.repository.CategoryRepository;
 import com.kobobook.www.admin.repository.ItemRepository;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class ItemServiceTests {
+public class ItemServiceTest {
 
     @Autowired
     private ItemService itemService;
@@ -33,18 +30,17 @@ public class ItemServiceTests {
     @Autowired
     private ItemRepository itemRepository;
 
-
     @Test
-    public void createItemTest() {
+    public void testCreateItem() {
         //given
         Category category = Category.builder()
                 .name("코믹").build();
-        categoryRepository.save(category);
+        Category inputCategory = categoryRepository.save(category);
 
         Item item = Item.builder()
                 .name("어벤져스")
                 .category(Category.builder()
-                    .id(1).build()).build();
+                    .id(inputCategory.getId()).build()).build();
 
         //when
         itemService.create(item);
@@ -56,7 +52,7 @@ public class ItemServiceTests {
     }
 
     @Test
-    public void findItemWithCategoryTest() {
+    public void testFindItemWithCategory() {
         //given
         Item item = Item.builder()
                 .name("Vue.js")
@@ -74,31 +70,33 @@ public class ItemServiceTests {
     }
 
     @Test
-    public void updateItemTest() {
+    public void testUpdateItem() {
         //given
         Category category = Category.builder()
                 .name("컴퓨터").build();
         Category category1 = Category.builder()
                 .name("IT").build();
-        categoryRepository.save(category);
-        categoryRepository.save(category1);
+        Category inputCategory = categoryRepository.save(category);
+        Category inputCategory1 = categoryRepository.save(category1);
 
         Item item = Item.builder()
                 .name("Vue.js")
-                .category(category).build();
+                .category(inputCategory).build();
 
         Item insertItem = itemRepository.save(item);
 
         Item updateItem = Item.builder()
                 .name("수정 Vue.js")
                 .category(Category.builder()
-                    .id(2).build()).build();
+                    .id(inputCategory1.getId()).build()).build();
+
         //when
         itemService.updateItem(insertItem.getId(), updateItem);
-        Item found = itemRepository.findById(1).orElse(null);
+        Item found = itemRepository.findById(insertItem.getId()).orElse(null);
+
         //then
         assertThat(found.getName()).isEqualTo("수정 Vue.js");
-//        assertThat(found.getCategory().getName()).isEqualTo("IT");
+        assertThat(found.getCategory().getName()).isEqualTo("IT");
     }
 
 }

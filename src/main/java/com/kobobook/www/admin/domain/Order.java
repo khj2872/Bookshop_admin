@@ -3,6 +3,7 @@ package com.kobobook.www.admin.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "ORDERS")
 @Getter
 @Setter
+@ToString(exclude = "orderItems")
 public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,19 +75,5 @@ public class Order {
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", member=" + member +
-                ", orderItems=" + orderItems +
-                ", delivery=" + delivery +
-                ", orderDate=" + orderDate +
-                ", status=" + status +
-                ", usingPoint=" + usingPoint +
-                ", savingPoint=" + savingPoint +
-                '}';
     }
 }

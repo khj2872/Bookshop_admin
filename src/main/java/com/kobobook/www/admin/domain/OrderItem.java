@@ -3,12 +3,14 @@ package com.kobobook.www.admin.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class OrderItem {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,13 +46,4 @@ public class OrderItem {
         return getPrice() * getCount();
     }
 
-    @Override
-    public String toString() {
-        return "OrderItem{" +
-                "id=" + id +
-                ", item=" + item +
-                ", price=" + price +
-                ", count=" + count +
-                '}';
-    }
 }
