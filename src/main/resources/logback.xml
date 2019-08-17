@@ -4,7 +4,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <!-- 로그 저장 할 위치 -->
-    <property name="LOG_DIR" value="/home/ec2-user/app/tomcat-log/kobobook-admin" />
+    <property name="LOG_DIR" value="/app/tomcat-log/kobobook-admin" />
     <property name="LOG_DIR" value="E:/workspace/IDEA_workspace/log/kobobook-admin" />
 
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
