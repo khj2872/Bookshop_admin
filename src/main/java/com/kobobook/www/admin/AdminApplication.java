@@ -21,7 +21,7 @@ public class AdminApplication
     private static final String APPLICATION_LOCATIONS = "spring.config.location="
             + "classpath:application.yml,"
             + "file:///E:/workspace/IDEA_workspace/config/kobobook-admin/real-application.yml,"
-            + "/app/config/kobobook-admin/real-application.yml";
+            + "file:///home/ec2-user/app/config/kobobook-admin/real-application.yml";
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(AdminApplication.class)
