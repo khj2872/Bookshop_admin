@@ -63,15 +63,6 @@ logging:
           descriptor:
             sql: trace
 
-#server:
-#  ssl:
-#    enabled: true
-#    key-store: keystore.p12
-#    key-store-password: gurwls12
-#    key-store-type: PKCS12
-#    key-alias: bns-ssl
-#  port: 8443
-
 ---
 spring.profiles: set1
 spring.profiles.include: real-db
