@@ -67,8 +67,8 @@ public class OrderRepositoryImpl extends QuerydslRepositorySupport implements Cu
         return queryFactory
                 .selectDistinct(orderItem)
                 .from(orderItem)
-                .join(order.member, member).fetchJoin()
                 .join(orderItem.order, order).fetchJoin()
+                .join(order.member, member).fetchJoin()
                 .join(orderItem.item, item).fetchJoin()
                 .join(order.delivery, delivery).fetchJoin()
                 .where(containsItemName(orderSearch.getItemName()),
