@@ -15,13 +15,13 @@ import java.util.Date;
 
 @SpringBootApplication
 public class AdminApplication
-//        implements ApplicationRunner
+        implements ApplicationRunner
                                 {
 
     private static final String APPLICATION_LOCATIONS = "spring.config.location="
             + "classpath:application.yml,"
             + "file:///E:/workspace/IDEA_workspace/config/kobobook-admin/real-application.yml,"
-            + "/app/config/kobobook-admin/real-application.yml";
+            + "file:///home/ec2-user/app/config/kobobook-admin/real-application.yml";
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(AdminApplication.class)
@@ -29,7 +29,7 @@ public class AdminApplication
                 .run(args);
     }
 
-    /*@Autowired
+    @Autowired
     MemberService memberService;
 
     @Override
@@ -46,5 +46,5 @@ public class AdminApplication
             System.out.println("중복 id");
         }
 
-    }*/
+    }
 }

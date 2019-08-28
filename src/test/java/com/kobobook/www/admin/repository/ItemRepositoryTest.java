@@ -2,7 +2,6 @@ package com.kobobook.www.admin.repository;
 
 import com.kobobook.www.admin.domain.Category;
 import com.kobobook.www.admin.domain.Item;
-import com.kobobook.www.admin.repository.ItemRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class ItemRepositoryTests {
+public class ItemRepositoryTest {
 
     @Autowired
     private ItemRepository itemRepository;
 
     @Test
-    public void findItemWithCategoryTest() {
+    public void testFindItemWithCategory() {
         //given
         Item item = Item.builder()
                 .name("테스트 주도 개발")
@@ -40,7 +39,7 @@ public class ItemRepositoryTests {
     }
 
     @Test
-    public void selectCountAllItemsTest() {
+    public void testSelectCountAllItems() {
         //given
         Item item1 = Item.builder()
                 .name("이것이 자바다").build();

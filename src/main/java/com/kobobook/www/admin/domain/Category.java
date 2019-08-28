@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString(exclude = "items")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,11 +25,4 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Item> items = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

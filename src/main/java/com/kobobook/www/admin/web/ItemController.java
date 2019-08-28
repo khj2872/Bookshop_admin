@@ -2,12 +2,15 @@ package com.kobobook.www.admin.web;
 
 import com.kobobook.www.admin.domain.Category;
 import com.kobobook.www.admin.domain.Item;
+import com.kobobook.www.admin.dto.CategoryDTO;
 import com.kobobook.www.admin.dto.ItemDTO;
 import com.kobobook.www.admin.repository.CategoryRepository;
 import com.kobobook.www.admin.repository.ItemRepository;
+import com.kobobook.www.admin.service.CategoryService;
 import com.kobobook.www.admin.service.ItemService;
 import com.kobobook.www.admin.util.BoardPager;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,11 +36,11 @@ public class ItemController {
 
     private ItemRepository itemRepository;
 
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
     @GetMapping("/register")
     public String registerItemForm(Model model) {
-        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryDTO> categoryList = categoryService.findCategoryList();
 
         model.addAttribute("categoryList", categoryList);
 
@@ -46,7 +49,6 @@ public class ItemController {
 
     @PostMapping("/register")
     public String registerItem(Item item) {
-        System.out.println("item : " + item);
         itemService.create(item);
         return "redirect:/admin/items/register";
 
@@ -76,7 +78,7 @@ public class ItemController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable("id") Integer itemId, Model model) {
         ItemDTO.ItemWithCategory item = itemService.findItemWithCategory(itemId);
-        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryDTO> categoryList = categoryService.findCategoryList();
 
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("item", item);

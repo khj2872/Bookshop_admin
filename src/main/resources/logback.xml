@@ -4,12 +4,22 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <!-- 로그 저장 할 위치 -->
+<<<<<<< HEAD
 <!--    <property name="LOG_DIR" value="/home/ec2-user/app/tomcat-log/kobobook-admin/" />-->
     <property name="LOG_DIR" value="C:/Users/khj28/Desktop/workspace/kobobook-admin-log/" />
 
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_DIR}%d{yyyy-MM-dd}.log</fileNamePattern>
+=======
+    <property name="LOG_DIR" value="/home/ec2-user/app/tomcat-log/kobobook-admin" />
+<!--    <property name="LOG_DIR" value="E:/workspace/IDEA_workspace/log/kobobook-admin" />-->
+
+    <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--        <file>${LOG_DIR}%d{yyyy-MM-dd}.log</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd}.log</fileNamePattern>
+>>>>>>> 7925283632f43fa1a44f48fbefe2402fc1dfd86e
             <maxHistory>30</maxHistory> <!-- 30일 전 까지의 로그만 저장 -->
         </rollingPolicy>
         <encoder>

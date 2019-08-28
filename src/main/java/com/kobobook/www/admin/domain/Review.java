@@ -3,6 +3,7 @@ package com.kobobook.www.admin.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Review {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +45,4 @@ public class Review {
         return review;
     }
 
-    @Override
-    public String toString() {
-        return "Review{" +
-                "id=" + id +
-                ", member=" + member +
-                ", rating=" + rating +
-                ", regDate=" + regDate +
-                ", content='" + content + '\'' +
-                '}';
-    }
 }
