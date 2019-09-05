@@ -45,7 +45,6 @@ public class Order {
         Order order = new Order();
 
         order.setMember(member);
-        member.getOrders().add(order);
 
         order.setDelivery(delivery);
         delivery.setOrder(order);

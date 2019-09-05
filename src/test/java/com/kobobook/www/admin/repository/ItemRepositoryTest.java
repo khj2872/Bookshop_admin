@@ -42,10 +42,10 @@ public class ItemRepositoryTest {
     public void testSelectCountAllItems() {
         //given
         Item item1 = Item.builder()
-                .name("이것이 자바다").build();
+                .name("자바 성능 튜닝 이야기").build();
 
         Item item2 = Item.builder()
-                .name("이것이 자바스크립트다").build();
+                .name("디자인 패턴").build();
 
         itemRepository.save(item1);
         itemRepository.save(item2);

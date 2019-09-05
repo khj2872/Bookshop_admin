@@ -43,7 +43,7 @@
                         <thead>
                         <tr>
                             <th>주문번호</th>
-                            <th>주문일</th>
+<!--                            <th>주문일</th>-->
                             <th>주문자</th>
                             <th><input type="checkbox" id="totalCheckBox"/></th>
                             <th>상품명</th>
@@ -57,7 +57,7 @@
                             <td th:inline="text">
                                 <a th:href="@{|/admin/orders/${orderItem.order.id}|}">[[${orderItem.order.id}]]</a>
                             </td>
-                            <td th:text="${orderItem.order.orderDate}"></td>
+<!--                            <td th:text="${orderItem.order.orderDate}"></td>-->
                             <td th:inline="text">
                                 [[${orderItem.order.member.username}]]<br>
                                 ([[${orderItem.order.member.userEmail}]])
@@ -80,35 +80,6 @@
                         </tbody>
                     </table>
                 </div>
-<!--                <div style="margin-bottom: 20px">-->
-<!--                    <nav aria-label="Page navigation example">-->
-<!--                        <ul class="pagination justify-content-center">-->
-<!--                            <li class="page-item" th:classappend="${pager.curBlock <= 1} ? disabled">-->
-<!--                                <a class="page-link" th:href="@{/admin/items(page=0, size=${itemPage.size})}" tabindex="-1">처음</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item" th:classappend="${pager.curBlock <= 1} ? disabled">-->
-<!--                                <a class="page-link" th:href="@{/admin/items(page=${pager.prevPage}, size=${itemPage.size})}" tabindex="-1">이전</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item"-->
-<!--                                th:if="${itemPage.totalPages > 0}"-->
-<!--                                th:each="pageNumber : ${pageNumbers}"-->
-<!--                                th:classappend="${pageNumber == itemPage.number + 1} ? active">-->
-<!--                                <a class="page-link"-->
-<!--                                   th:href="@{/admin/items(page=${pageNumber - 1}, size=${itemPage.size})}"-->
-<!--                                   th:inline="text">-->
-<!--                                    [[${pageNumber}]]-->
-<!--                                    <span class="sr-only" th:if="${pageNumber == itemPage.number + 1}">(current)</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item" th:classappend="${pager.curBlock >= pager.totBlock} ? disabled">-->
-<!--                                <a class="page-link" th:href="@{/admin/items(page=${pager.nextPage}, size=${itemPage.size})}">다음</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item" th:classappend="${pager.curPage >= pager.totPage} ? disabled">-->
-<!--                                <a class="page-link" th:href="@{/admin/items(page=${pager.totPage - 1}, size=${itemPage.size})}">끝</a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </nav>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -117,7 +88,7 @@
     <script type="text/javascript" th:inline="javascript">
 
         $(document).ready(function() {
-            fn_cellMerge('t', [0,1,2,3,7]);
+            fn_cellMerge('t', [0,1,2,6]);
         });
 
         var token = $('#_csrf').attr('content');

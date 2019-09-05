@@ -1,20 +1,14 @@
 package com.kobobook.www.admin.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@ToString(exclude = "orders")
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -45,10 +39,6 @@ public class Member {
     private LocalDateTime regDate;
 
     private long point;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
 
     public boolean matchPassword(String password) {
         return this.getPassword().equals(password);

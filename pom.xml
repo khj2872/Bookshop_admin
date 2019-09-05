@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kobobook.www</groupId>
-    <artifactId>admin</artifactId>
+    <artifactId>kobobook-admin</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>admin</name>
+    <name>kobobook-admin</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

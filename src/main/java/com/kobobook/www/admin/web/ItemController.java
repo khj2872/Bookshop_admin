@@ -1,34 +1,32 @@
 package com.kobobook.www.admin.web;
 
-import com.kobobook.www.admin.domain.Category;
 import com.kobobook.www.admin.domain.Item;
 import com.kobobook.www.admin.dto.CategoryDTO;
 import com.kobobook.www.admin.dto.ItemDTO;
-import com.kobobook.www.admin.repository.CategoryRepository;
 import com.kobobook.www.admin.repository.ItemRepository;
 import com.kobobook.www.admin.service.CategoryService;
 import com.kobobook.www.admin.service.ItemService;
 import com.kobobook.www.admin.util.BoardPager;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/admin/items")
+@NoArgsConstructor
 @AllArgsConstructor
 public class ItemController {
 
@@ -57,13 +55,10 @@ public class ItemController {
     @GetMapping("")
     public String list(@PageableDefault(direction = Sort.Direction.DESC, sort = "id") Pageable pageable, Model model) {
         Page<Item> itemPage = itemRepository.findAll(pageable);
-
         model.addAttribute("itemPage", itemPage);
 
         int totalPages = itemPage.getTotalPages();
-
         BoardPager pager = new BoardPager(itemPage.getTotalElements(), itemPage.getNumber() + 1);
-
         model.addAttribute("pager", pager);
 
         if (totalPages > 0) {

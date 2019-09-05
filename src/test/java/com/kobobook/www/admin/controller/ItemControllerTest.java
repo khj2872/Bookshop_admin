@@ -10,25 +10,19 @@
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.mockito.Mock;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.boot.test.web.client.TestRestTemplate;
 //import org.springframework.test.context.junit4.SpringRunner;
 //import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.MockMvcBuilder;
 //import org.springframework.test.web.servlet.ResultActions;
 //import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 //import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.ui.Model;
 //
-//import java.util.ArrayList;
 //import java.util.Arrays;
 //import java.util.List;
 //
 //import static org.mockito.BDDMockito.given;
-//import static org.mockito.Mockito.times;
-//import static org.mockito.Mockito.verify;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 //import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -41,17 +35,14 @@
 //    private MockMvc mockMvc;
 //
 //    @MockBean
-//    private ItemService itemService;
-//
-//    @MockBean
-//    private ItemRepository itemRepository;
+//    private ItemController itemController;
 //
 //    @Mock
 //    private CategoryRepository categoryRepository;
 //
 //    @Before
 //    public void setup() throws Exception {
-//        mockMvc = MockMvcBuilders.standaloneSetup(ItemController.class).build();
+//        mockMvc = MockMvcBuilders.standaloneSetup(itemController).build();
 //    }
 //
 //    @Test
@@ -62,7 +53,9 @@
 //                Category.builder().name("과학").build()
 //        );
 //
-//        given(categoryRepository.findAll()).willReturn(categoryList);
+////        given(categoryRepository.findAll()).willReturn(categoryList);
+//        given(itemController.registerItem())
+//                .willReturn(categoryList);
 //
 //        //when
 //        ResultActions actions = mockMvc.perform(get("/admin/items/register"))
